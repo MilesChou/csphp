@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ruleset>
+    <!-- display progress and sniff -->
+    <arg value="p"/>
+    <arg value="s"/>
+
+    <!-- use colors in output -->
+    <arg name="colors"/>
+
+    <!-- inherit rules from: -->
+    <rule ref="PSR2"/>
+
+    <!-- Paths and file to check -->
+    <file>src</file>
+    <file>tests</file>
+
+    <!-- specific and just exclude rules in some file -->
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <exclude-pattern>tests</exclude-pattern>
+    </rule>
+</ruleset>
