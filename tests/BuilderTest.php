@@ -28,8 +28,39 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeOkay()
+    public function shouldReturnEmptyWhenBuildWithEmptyPolicies()
     {
-        $this->assertInstanceOf(Builder::class, $this->target);
+        $this->assertSame('', $this->target->build());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeOkayWithCallSetDefaultSrc()
+    {
+        $this->target->setDefaultSrc('*');
+
+        $this->assertSame('default-src *', $this->target->build());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeOkayWithCallSetScriptSrc()
+    {
+        $this->target->setScriptSrc("'self'");
+
+        $this->assertSame("script-src 'self'", $this->target->build());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeOkayWithManyPolicies()
+    {
+        $this->target->setDefaultSrc('*')
+            ->setScriptSrc("'self'");
+
+        $this->assertSame("default-src *; script-src 'self'", $this->target->build());
     }
 }
