@@ -58,4 +58,17 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame("script-src 'self' 'unsafe-eval'", (string)$actual);
     }
+
+    /**
+     * @test
+     */
+    public function shouldReturnSelfStringWhenCallAllowUnsafeEvalAndAllowSelfAndAllowAny()
+    {
+        $actual = Policy::create('script-src')
+            ->allowUnsafeEval()
+            ->allowSelf()
+            ->allowAny();
+
+        $this->assertSame('script-src *', (string)$actual);
+    }
 }

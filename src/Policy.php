@@ -12,13 +12,17 @@ class Policy
     /**
      * @var bool
      */
+    private $allowAny = false;
+
+    /**
+     * @var bool
+     */
     private $allowSelf = false;
 
     /**
      * @var bool
      */
     private $allowUnsafeEval = false;
-
     /**
      * @var bool
      */
@@ -45,6 +49,10 @@ class Policy
     {
         $policy = $this->resourceName;
 
+        if ($this->allowAny) {
+            return "${policy} *";
+        }
+
         if ($this->allowSelf) {
             $policy .= " 'self'";
         }
@@ -58,6 +66,16 @@ class Policy
         }
 
         return $policy !== $this->resourceName ? $policy : '';
+    }
+
+    /**
+     * @return static
+     */
+    public function allowAny()
+    {
+        $this->allowAny = true;
+
+        return $this;
     }
 
     /**
