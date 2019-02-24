@@ -84,4 +84,15 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame("default-src *; script-src 'self'; img-src https:", $this->target->build());
     }
+
+    /**
+     * @test
+     */
+    public function shouldBeOkayWithCallDefaultSrcWithCallAllowAny()
+    {
+        $this->target->defaultSrc()
+            ->allowAny();
+
+        $this->assertSame('default-src *', $this->target->build());
+    }
 }
