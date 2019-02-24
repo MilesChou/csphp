@@ -28,6 +28,17 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function shouldReturnSelfStringWhenCallAllowUnsafeInline()
+    {
+        $actual = Policy::create('script-src')
+            ->allowUnsafeInline();
+
+        $this->assertSame("script-src 'unsafe-inline'", (string)$actual);
+    }
+
+    /**
+     * @test
+     */
     public function shouldReturnSelfStringWhenCallAllowUnsafeEval()
     {
         $actual = Policy::create('script-src')

@@ -20,6 +20,11 @@ class Policy
     private $allowUnsafeEval = false;
 
     /**
+     * @var bool
+     */
+    private $allowUnsafeInline = false;
+
+    /**
      * @param string $resourceName
      * @return static
      */
@@ -48,6 +53,10 @@ class Policy
             $policy .= " 'unsafe-eval'";
         }
 
+        if ($this->allowUnsafeInline) {
+            $policy .= " 'unsafe-inline'";
+        }
+
         return $policy !== $this->resourceName ? $policy : '';
     }
 
@@ -67,6 +76,13 @@ class Policy
     public function allowUnsafeEval()
     {
         $this->allowUnsafeEval = true;
+
+        return $this;
+    }
+
+    public function allowUnsafeInline()
+    {
+        $this->allowUnsafeInline = true;
 
         return $this;
     }
