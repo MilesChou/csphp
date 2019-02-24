@@ -11,6 +11,40 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeOkayWhenCastToString()
     {
-        $this->assertSame('script-src', (string)Policy::create('script-src'));
+        $this->assertSame('', (string)Policy::create('script-src'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnSelfStringWhenCallAllowSelf()
+    {
+        $actual = Policy::create('script-src')
+            ->allowSelf();
+
+        $this->assertSame("script-src 'self'", (string)$actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnSelfStringWhenCallAllowUnsafeEval()
+    {
+        $actual = Policy::create('script-src')
+            ->allowUnsafeEval();
+
+        $this->assertSame("script-src 'unsafe-eval'", (string)$actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnSelfStringWhenCallAllowUnsafeEvalAndAllowSelf()
+    {
+        $actual = Policy::create('script-src')
+            ->allowUnsafeEval()
+            ->allowSelf();
+
+        $this->assertSame("script-src 'self' 'unsafe-eval'", (string)$actual);
     }
 }

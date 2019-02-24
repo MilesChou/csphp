@@ -10,6 +10,16 @@ class Policy
     private $resourceName;
 
     /**
+     * @var bool
+     */
+    private $allowSelf = false;
+
+    /**
+     * @var bool
+     */
+    private $allowUnsafeEval = false;
+
+    /**
      * @param string $resourceName
      * @return static
      */
@@ -28,6 +38,36 @@ class Policy
 
     public function __toString()
     {
-        return $this->resourceName;
+        $policy = $this->resourceName;
+
+        if ($this->allowSelf) {
+            $policy .= " 'self'";
+        }
+
+        if ($this->allowUnsafeEval) {
+            $policy .= " 'unsafe-eval'";
+        }
+
+        return $policy !== $this->resourceName ? $policy : '';
+    }
+
+    /**
+     * @return static
+     */
+    public function allowSelf()
+    {
+        $this->allowSelf = true;
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function allowUnsafeEval()
+    {
+        $this->allowUnsafeEval = true;
+
+        return $this;
     }
 }
