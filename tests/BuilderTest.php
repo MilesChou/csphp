@@ -95,4 +95,21 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('default-src *', $this->target->build());
     }
+
+    /**
+     * @test
+     */
+    public function shouldBeOkayWithCallImgSrcAndScriptSrcAndStyleSrc()
+    {
+        $this->target->imgSrc()
+            ->allowAny();
+
+        $this->target->scriptSrc()
+            ->allowUnsafeEval();
+
+        $this->target->styleSrc()
+            ->allowSelf();
+
+        $this->assertSame("img-src *; script-src 'unsafe-eval'; style-src 'self'", $this->target->build());
+    }
 }

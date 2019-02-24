@@ -34,6 +34,36 @@ class Builder
     }
 
     /**
+     * @return Policy
+     */
+    public function imgSrc()
+    {
+        $this->policies['img-src'] = new Policy('img-src');
+
+        return $this->policies['img-src'];
+    }
+
+    /**
+     * @return Policy
+     */
+    public function scriptSrc()
+    {
+        $this->policies['script-src'] = new Policy('script-src');
+
+        return $this->policies['script-src'];
+    }
+
+    /**
+     * @return Policy
+     */
+    public function styleSrc()
+    {
+        $this->policies['style-src'] = new Policy('style-src');
+
+        return $this->policies['style-src'];
+    }
+
+    /**
      * @param string $policy
      * @return static
      */
