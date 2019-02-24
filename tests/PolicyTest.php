@@ -9,9 +9,8 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeOkay()
+    public function shouldBeOkayWhenCastToString()
     {
-        $this->assertInstanceOf(Policy::class, Policy::create('scriptSrc'));
-        $this->assertSame('scriptSrc', Policy::create('scriptSrc')->getResourceName());
+        $this->assertSame('script-src', (string)Policy::create('script-src'));
     }
 }

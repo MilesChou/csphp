@@ -26,10 +26,7 @@ class Policy
         $this->resourceName = $resourceName;
     }
 
-    /**
-     * @return string
-     */
-    public function getResourceName()
+    public function __toString()
     {
         return $this->resourceName;
     }
