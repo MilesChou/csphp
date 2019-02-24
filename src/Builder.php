@@ -40,4 +40,15 @@ class Builder
 
         return $this;
     }
+
+    /**
+     * @param string $policy
+     * @return static
+     */
+    public function setStyleSrc($policy)
+    {
+        $this->policies['style-src'] = $policy;
+
+        return $this;
+    }
 }

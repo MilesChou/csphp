@@ -56,6 +56,16 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function shouldBeOkayWithCallSetStyleSrc()
+    {
+        $this->target->setStyleSrc("'self' http://example.com");
+
+        $this->assertSame("style-src 'self' http://example.com", $this->target->build());
+    }
+
+    /**
+     * @test
+     */
     public function shouldBeOkayWithManyPolicies()
     {
         $this->target->setDefaultSrc('*')
