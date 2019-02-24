@@ -66,11 +66,22 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function shouldBeOkayWithCallSetImgSrc()
+    {
+        $this->target->setImgSrc('https:');
+
+        $this->assertSame('img-src https:', $this->target->build());
+    }
+
+    /**
+     * @test
+     */
     public function shouldBeOkayWithManyPolicies()
     {
         $this->target->setDefaultSrc('*')
-            ->setScriptSrc("'self'");
+            ->setScriptSrc("'self'")
+            ->setImgSrc('https:');
 
-        $this->assertSame("default-src *; script-src 'self'", $this->target->build());
+        $this->assertSame("default-src *; script-src 'self'; img-src https:", $this->target->build());
     }
 }

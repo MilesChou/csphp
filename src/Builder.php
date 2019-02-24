@@ -34,6 +34,17 @@ class Builder
      * @param string $policy
      * @return static
      */
+    public function setImgSrc($policy)
+    {
+        $this->policies['img-src'] = $policy;
+
+        return $this;
+    }
+
+    /**
+     * @param string $policy
+     * @return static
+     */
     public function setScriptSrc($policy)
     {
         $this->policies['script-src'] = $policy;
