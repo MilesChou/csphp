@@ -2,8 +2,16 @@
 
 namespace MilesChou\Csphp;
 
+/**
+ * @mixin Builder
+ */
 class Policy
 {
+    /**
+     * @var Builder
+     */
+    private $builder;
+
     /**
      * @var string
      */
@@ -29,19 +37,29 @@ class Policy
     private $allowUnsafeInline = false;
 
     /**
+     * @param Builder $builder
      * @param string $resourceName
      * @return static
      */
-    public static function create($resourceName)
+    public static function create($builder, $resourceName)
     {
-        return new static($resourceName);
+        return new static($builder, $resourceName);
+    }
+
+    public function __call($name, $arguments)
+    {
+        $callable = [$this->builder, $name];
+
+        return call_user_func_array($callable, $arguments);
     }
 
     /**
+     * @param Builder $builder
      * @param string $resourceName
      */
-    public function __construct($resourceName)
+    public function __construct($builder, $resourceName)
     {
+        $this->builder = $builder;
         $this->resourceName = $resourceName;
     }
 

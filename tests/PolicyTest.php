@@ -11,7 +11,7 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeOkayWhenCastToString()
     {
-        $this->assertSame('', (string)Policy::create('script-src'));
+        $this->assertSame('', (string)Policy::create($this->getMock(Builder::class), 'script-src'));
     }
 
     /**
@@ -19,7 +19,7 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldReturnSelfStringWhenCallAllowSelf()
     {
-        $actual = Policy::create('script-src')
+        $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->allowSelf();
 
         $this->assertSame("script-src 'self'", (string)$actual);
@@ -30,7 +30,7 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldReturnSelfStringWhenCallAllowUnsafeInline()
     {
-        $actual = Policy::create('script-src')
+        $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->allowUnsafeInline();
 
         $this->assertSame("script-src 'unsafe-inline'", (string)$actual);
@@ -41,7 +41,7 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldReturnSelfStringWhenCallAllowUnsafeEval()
     {
-        $actual = Policy::create('script-src')
+        $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->allowUnsafeEval();
 
         $this->assertSame("script-src 'unsafe-eval'", (string)$actual);
@@ -52,7 +52,7 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldReturnSelfStringWhenCallAllowUnsafeEvalAndAllowSelf()
     {
-        $actual = Policy::create('script-src')
+        $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->allowUnsafeEval()
             ->allowSelf();
 
@@ -64,7 +64,7 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldReturnSelfStringWhenCallAllowUnsafeEvalAndAllowSelfAndAllowAny()
     {
-        $actual = Policy::create('script-src')
+        $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->allowUnsafeEval()
             ->allowSelf()
             ->allowAny();

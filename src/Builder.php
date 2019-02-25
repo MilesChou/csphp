@@ -28,7 +28,7 @@ class Builder
      */
     public function defaultSrc()
     {
-        $this->policies['default-src'] = new Policy('default-src');
+        $this->policies['default-src'] = new Policy($this, 'default-src');
 
         return $this->policies['default-src'];
     }
@@ -38,7 +38,7 @@ class Builder
      */
     public function imgSrc()
     {
-        $this->policies['img-src'] = new Policy('img-src');
+        $this->policies['img-src'] = new Policy($this, 'img-src');
 
         return $this->policies['img-src'];
     }
@@ -48,7 +48,7 @@ class Builder
      */
     public function scriptSrc()
     {
-        $this->policies['script-src'] = new Policy('script-src');
+        $this->policies['script-src'] = new Policy($this, 'script-src');
 
         return $this->policies['script-src'];
     }
@@ -58,7 +58,7 @@ class Builder
      */
     public function styleSrc()
     {
-        $this->policies['style-src'] = new Policy('style-src');
+        $this->policies['style-src'] = new Policy($this, 'style-src');
 
         return $this->policies['style-src'];
     }
