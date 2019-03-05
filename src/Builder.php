@@ -46,6 +46,30 @@ class Builder
     /**
      * @return Policy
      */
+    public function fontSrc()
+    {
+        return $this->policies['font-src'] = new Policy($this, 'font-src');
+    }
+
+    /**
+     * @return Policy
+     */
+    public function mediaSrc()
+    {
+        return $this->policies['media-src'] = new Policy($this, 'media-src');
+    }
+
+    /**
+     * @return Policy
+     */
+    public function objectSrc()
+    {
+        return $this->policies['object-src'] = new Policy($this, 'object-src');
+    }
+
+    /**
+     * @return Policy
+     */
     public function scriptSrc()
     {
         $this->policies['script-src'] = new Policy($this, 'script-src');
@@ -78,9 +102,42 @@ class Builder
      * @param string $policy
      * @return static
      */
+    public function setFontSrc($policy)
+    {
+        $this->policies['font-src'] = $policy;
+
+        return $this;
+    }
+
+    /**
+     * @param string $policy
+     * @return static
+     */
     public function setImgSrc($policy)
     {
         $this->policies['img-src'] = $policy;
+
+        return $this;
+    }
+
+    /**
+     * @param string $policy
+     * @return static
+     */
+    public function setMediaSrc($policy)
+    {
+        $this->policies['media-src'] = $policy;
+
+        return $this;
+    }
+
+    /**
+     * @param string $policy
+     * @return static
+     */
+    public function setObjectSrc($policy)
+    {
+        $this->policies['object-src'] = $policy;
 
         return $this;
     }

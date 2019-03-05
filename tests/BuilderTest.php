@@ -80,9 +80,12 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     {
         $this->target->setDefaultSrc('*')
             ->setScriptSrc("'self'")
-            ->setImgSrc('https:');
+            ->setImgSrc('https:')
+            ->setMediaSrc('*')
+            ->setFontSrc('*')
+            ->setObjectSrc('*');
 
-        $this->assertSame("default-src *; script-src 'self'; img-src https:", $this->target->build());
+        $this->assertSame("default-src *; script-src 'self'; img-src https:; media-src *; font-src *; object-src *", $this->target->build());
     }
 
     /**
@@ -123,8 +126,14 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
             ->scriptSrc()
             ->allowUnsafeEval()
             ->styleSrc()
-            ->allowSelf();
+            ->allowSelf()
+            ->mediaSrc()
+            ->allowAny()
+            ->fontSrc()
+            ->allowAny()
+            ->objectSrc()
+            ->allowAny();
 
-        $this->assertSame("img-src *; script-src 'unsafe-eval'; style-src 'self'", $this->target->build());
+        $this->assertSame("img-src *; script-src 'unsafe-eval'; style-src 'self'; media-src *; font-src *; object-src *", $this->target->build());
     }
 }
