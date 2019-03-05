@@ -37,6 +37,11 @@ class Policy
     private $allowUnsafeInline = false;
 
     /**
+     * @var null|bool
+     */
+    private $denyAll;
+
+    /**
      * @param Builder $builder
      * @param string $resourceName
      * @return static
@@ -69,6 +74,10 @@ class Policy
 
         if ($this->allowAny) {
             return "${policy} *";
+        }
+
+        if ($this->denyAll) {
+            return "${policy} 'none'";
         }
 
         if ($this->allowSelf) {
@@ -119,6 +128,16 @@ class Policy
     public function allowUnsafeInline()
     {
         $this->allowUnsafeInline = true;
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function denyAll()
+    {
+        $this->denyAll = true;
 
         return $this;
     }

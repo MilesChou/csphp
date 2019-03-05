@@ -71,4 +71,15 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('script-src *', (string)$actual);
     }
+
+    /**
+     * @test
+     */
+    public function shouldReturnNoneStringWhenCallDenyAll()
+    {
+        $actual = Policy::create($this->getMock(Builder::class), 'script-src')
+            ->denyAll();
+
+        $this->assertSame("script-src 'none'", (string)$actual);
+    }
 }
