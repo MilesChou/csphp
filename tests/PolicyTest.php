@@ -78,8 +78,34 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
     public function shouldReturnNoneStringWhenCallDenyAll()
     {
         $actual = Policy::create($this->getMock(Builder::class), 'script-src')
+            ->allowUnsafeEval()
+            ->allowSelf()
             ->denyAll();
 
         $this->assertSame("script-src 'none'", (string)$actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnNoneStringWhenCallAllowAnyAndDenyAll()
+    {
+        $actual = Policy::create($this->getMock(Builder::class), 'script-src')
+            ->allowAny()
+            ->denyAll();
+
+        $this->assertSame("script-src 'none'", (string)$actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnStarStringWhenCallDenyAllAndAllowAny()
+    {
+        $actual = Policy::create($this->getMock(Builder::class), 'script-src')
+            ->denyAll()
+            ->allowAny();
+
+        $this->assertSame('script-src *', (string)$actual);
     }
 }
