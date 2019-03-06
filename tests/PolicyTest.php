@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use MilesChou\Csphp\Builder;
 use MilesChou\Csphp\Policy;
 
 class PolicyTest extends \PHPUnit_Framework_TestCase

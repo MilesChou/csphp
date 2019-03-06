@@ -47,7 +47,7 @@ class Policy
      * @param string $resourceName
      * @return static
      */
-    public static function create($builder, $resourceName)
+    public static function create(Builder $builder, $resourceName)
     {
         return new static($builder, $resourceName);
     }
@@ -63,7 +63,7 @@ class Policy
      * @param Builder $builder
      * @param string $resourceName
      */
-    public function __construct($builder, $resourceName)
+    public function __construct(Builder $builder, $resourceName)
     {
         $this->builder = $builder;
         $this->resourceName = $resourceName;
