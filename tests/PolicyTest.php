@@ -28,7 +28,7 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldReturnSelfStringWhenCallAllowUnsafeInline()
+    public function shouldReturnUnsafeInlineStringWhenCallAllowUnsafeInline()
     {
         $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->allowUnsafeInline();
@@ -39,7 +39,7 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldReturnSelfStringWhenCallAllowUnsafeEval()
+    public function shouldReturnUnsafeEvalStringWhenCallAllowUnsafeEval()
     {
         $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->allowUnsafeEval();
@@ -50,7 +50,7 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldReturnSelfStringWhenCallAllowUnsafeEvalAndAllowSelf()
+    public function shouldReturnSelfStringAndUnsafeEvalStringWhenCallAllowUnsafeEvalAndAllowSelf()
     {
         $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->allowUnsafeEval()
@@ -62,12 +62,12 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldReturnSelfStringWhenCallAllowUnsafeEvalAndAllowSelfAndAllowAny()
+    public function shouldReturnStarStringWhenCallAllowUnsafeEvalAndAllowSelfAndAllowAll()
     {
         $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->allowUnsafeEval()
             ->allowSelf()
-            ->allowAny();
+            ->allowAll();
 
         $this->assertSame('script-src *', (string)$actual);
     }
@@ -88,10 +88,10 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldReturnNoneStringWhenCallAllowAnyAndDenyAll()
+    public function shouldReturnNoneStringWhenCallAllowAllAndDenyAll()
     {
         $actual = Policy::create($this->getMock(Builder::class), 'script-src')
-            ->allowAny()
+            ->allowAll()
             ->denyAll();
 
         $this->assertSame("script-src 'none'", (string)$actual);
@@ -100,11 +100,11 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldReturnStarStringWhenCallDenyAllAndAllowAny()
+    public function shouldReturnStarStringWhenCallDenyAllAndAllowAll()
     {
         $actual = Policy::create($this->getMock(Builder::class), 'script-src')
             ->denyAll()
-            ->allowAny();
+            ->allowAll();
 
         $this->assertSame('script-src *', (string)$actual);
     }

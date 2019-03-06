@@ -20,7 +20,7 @@ class Policy
     /**
      * @var bool
      */
-    private $allowAny = false;
+    private $allowAll = false;
 
     /**
      * @var bool
@@ -31,6 +31,7 @@ class Policy
      * @var bool
      */
     private $allowUnsafeEval = false;
+
     /**
      * @var bool
      */
@@ -76,7 +77,7 @@ class Policy
             return "${policy} 'none'";
         }
 
-        if ($this->allowAny) {
+        if ($this->allowAll) {
             return "${policy} *";
         }
 
@@ -98,9 +99,9 @@ class Policy
     /**
      * @return static
      */
-    public function allowAny()
+    public function allowAll()
     {
-        $this->allowAny = true;
+        $this->allowAll = true;
         $this->denyAll = false;
 
         return $this;
@@ -138,7 +139,7 @@ class Policy
      */
     public function denyAll()
     {
-        $this->allowAny = false;
+        $this->allowAll = false;
         $this->denyAll = true;
 
         return $this;

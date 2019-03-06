@@ -94,7 +94,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     public function shouldBeOkayWithCallDefaultSrcWithCallAllowAny()
     {
         $this->target->defaultSrc()
-            ->allowAny();
+            ->allowAll();
 
         $this->assertSame('default-src *', $this->target->build());
     }
@@ -105,7 +105,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     public function shouldBeOkayWithCallImgSrcAndScriptSrcAndStyleSrc()
     {
         $this->target->imgSrc()
-            ->allowAny();
+            ->allowAll();
 
         $this->target->scriptSrc()
             ->allowUnsafeEval();
@@ -122,17 +122,17 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     public function shouldBeOkayWhenCallImgSrcAndScriptSrcAndStyleSrcWithFluentCall()
     {
         $this->target->imgSrc()
-            ->allowAny()
+            ->allowAll()
             ->scriptSrc()
             ->allowUnsafeEval()
             ->styleSrc()
             ->allowSelf()
             ->mediaSrc()
-            ->allowAny()
+            ->allowAll()
             ->fontSrc()
-            ->allowAny()
+            ->allowAll()
             ->objectSrc()
-            ->allowAny();
+            ->allowAll();
 
         $this->assertSame("img-src *; script-src 'unsafe-eval'; style-src 'self'; media-src *; font-src *; object-src *", $this->target->build());
     }
