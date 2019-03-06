@@ -109,4 +109,70 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('script-src *', (string)$actual);
     }
+
+    /**
+     * @test
+     */
+    public function shouldReturnSamePolicyWhenCreateFromStarString()
+    {
+        $expectedPolicy = '*';
+
+        $actual = Policy::createFromString($this->getMock(Builder::class), 'script-src', $expectedPolicy);
+
+        $this->assertSame("script-src ${expectedPolicy}", (string)$actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnSamePolicyWhenCreateFromNoneString()
+    {
+        $expectedPolicy = "'none'";
+
+        $actual = Policy::createFromString($this->getMock(Builder::class), 'script-src', $expectedPolicy);
+
+        $this->assertSame("script-src ${expectedPolicy}", (string)$actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnSamePolicyWhenCreateFromSelfString()
+    {
+        $expectedPolicy = "'self'";
+
+        $actual = Policy::createFromString($this->getMock(Builder::class), 'script-src', $expectedPolicy);
+
+        $this->assertSame("script-src ${expectedPolicy}", (string)$actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnNoneWhenCreateFromComplexStringWithNoneString()
+    {
+        $actual = Policy::createFromString($this->getMock(Builder::class), 'script-src', "* 'self' 'none'");
+
+        $this->assertSame("script-src 'none'", (string)$actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnStarWhenCreateFromComplexStringWithStarString()
+    {
+        $actual = Policy::createFromString($this->getMock(Builder::class), 'script-src', "* 'self' 'unsafe-eval'");
+
+        $this->assertSame('script-src *', (string)$actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnComplexStringWhenCreateFromComplexStringWithStarString()
+    {
+        $actual = Policy::createFromString($this->getMock(Builder::class), 'script-src', "'self' 'unsafe-eval'");
+
+        $this->assertSame("script-src 'self' 'unsafe-eval'", (string)$actual);
+    }
 }

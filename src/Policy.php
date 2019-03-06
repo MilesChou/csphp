@@ -52,6 +52,37 @@ class Policy
         return new static($builder, $resourceName);
     }
 
+    /**
+     * @param Builder $builder
+     * @param string $resourceName
+     * @param string $str
+     * @return static
+     */
+    public static function createFromString(Builder $builder, $resourceName, $str)
+    {
+        $instance = new static($builder, $resourceName);
+
+        $policiesArray = explode(' ', $str);
+
+        if (in_array("'none'", $policiesArray, true)) {
+            return $instance->denyAll();
+        }
+
+        if (in_array('*', $policiesArray, true)) {
+            return $instance->allowAll();
+        }
+
+        if (in_array("'self'", $policiesArray, true)) {
+            $instance->allowSelf();
+        }
+
+        if (in_array("'unsafe-eval'", $policiesArray, true)) {
+            $instance->allowUnsafeEval();
+        }
+
+        return $instance;
+    }
+
     public function __call($name, $arguments)
     {
         $callable = [$this->builder, $name];
