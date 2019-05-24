@@ -17,6 +17,7 @@
     "require-dev": {
         "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpunit": ">=4.8 <6",
+        "psy/psysh": "^0.9.9",
         "squizlabs/php_codesniffer": "^3.2",
         "symfony/console": "^2.8"
     },
