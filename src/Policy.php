@@ -54,6 +54,20 @@ class Policy
 
     /**
      * @param Builder $builder
+     * @param string $str
+     * @return static
+     */
+    public static function createFromFullString(Builder $builder, $str)
+    {
+        $policy = explode(' ', $str);
+
+        $resourceName = array_shift($policy);
+
+        return self::createFromString($builder, $resourceName, implode(' ', $policy));
+    }
+
+    /**
+     * @param Builder $builder
      * @param string $resourceName
      * @param string $str
      * @return static

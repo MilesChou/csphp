@@ -175,4 +175,14 @@ class PolicyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame("script-src 'self' 'unsafe-eval'", (string)$actual);
     }
+
+    /**
+     * @test
+     */
+    public function shouldReturnComplexStringWhenCreateFromFullString()
+    {
+        $actual = Policy::createFromFullString($this->getMock(Builder::class), "script-src 'self' 'unsafe-eval'");
+
+        $this->assertSame("script-src 'self' 'unsafe-eval'", (string)$actual);
+    }
 }
