@@ -4,8 +4,9 @@ namespace Tests;
 
 use MilesChou\Csphp\Builder;
 use MilesChou\Csphp\Policy;
+use PHPUnit\Framework\TestCase;
 
-class PolicyTest extends \PHPUnit_Framework_TestCase
+class PolicyTest extends TestCase
 {
     /**
      * @test

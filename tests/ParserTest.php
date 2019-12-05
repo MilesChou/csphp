@@ -3,8 +3,9 @@
 namespace Tests;
 
 use MilesChou\Csphp\Parser;
+use PHPUnit\Framework\TestCase;
 
-class ParserTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
     /**
      * @var Parser
